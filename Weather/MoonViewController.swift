@@ -1,44 +1,17 @@
-/*
- * Copyright (c) 2016 Razeware LLC
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+//
+//  MoonViewController.swift
+//  Weather
+//
+//  Created by Zach Govani on 3/10/17.
+//  Copyright © 2017 Zach Govani. All rights reserved.
+//
 
 import UIKit
+import Foundation
 
-import CoreLocation
-import Alamofire
-import SwiftyJSON
-
-class ViewController: UIViewController {
+class MoonViewController: UIViewController {
     
-    var temp = -273
-    var summary = ""
-    var rainTimeUnix = -1
-    var rainMessage = ""
-    var moonPhase = -1.0
-    var tempLabel: UILabel!
-    var summaryLabel: UILabel!
-    var rainMessageLabel: UILabel!
-    var rainTime = ""
-    var color = backGround.hot
-    var moon: UIImageView!
+    var moon: UIImageView
     
     // Use this for different backgrounds based on current weather
     enum backGround {
@@ -76,24 +49,6 @@ class ViewController: UIViewController {
         view.addSubview(rainMessageLabel)
         
         
-        
-        moon = UIImageView(frame: CGRect(x: 10, y: rainMessageLabel.frame.maxY, width: view.frame.width - 20, height: view.frame.width - 20))
-        moon.image = whichMoon()
-        view.addSubview(moon)
-        
-        
-    }
-    
-    func whichMoon()->UIImage {
-        for i in 0..<14 {
-            if Double(i) * 0.0714 >= moonPhase {
-                let index = i + 1
-                let file = "moon" + String(index)
-                return UIImage(named: file)!
-            }
-            
-        }
-        return UIImage()
     }
     
     func setupGradient() {
