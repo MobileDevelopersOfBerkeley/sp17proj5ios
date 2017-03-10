@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: notificationKey), object: nil, queue: nil, using: displayData)
+        displayPoweredBy()
     }
     
     func displayData(notification: Notification) {
@@ -176,6 +177,21 @@ class ViewController: UIViewController {
         nightView.layer.zPosition = -5
         nightView.startAnimating()
         view.addSubview(nightView)
+    }
+    
+    func displayPoweredBy() {
+        let poweredBy = UIButton(frame: CGRect(x: 0, y: view.frame.height - 30, width: 50, height: 50))
+        poweredBy.setTitle("Powered By Dark Sky", for: .normal)
+        poweredBy.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        poweredBy.sizeToFit()
+        poweredBy.frame.origin.x = view.frame.width / 2 - poweredBy.frame.width / 2
+        poweredBy.tintColor = UIColor.white
+        poweredBy.addTarget(self, action: #selector(link), for: .touchUpInside)
+        view.addSubview(poweredBy)
+    }
+    
+    func link() {
+        UIApplication.shared.openURL(NSURL(string: "https://darksky.net/poweredby/")! as URL)
     }
 
 }
